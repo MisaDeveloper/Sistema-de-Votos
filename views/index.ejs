@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="/css/styleList.css">
+<script src="https://kit.fontawesome.com/94271d9134.js" crossorigin="anonymous"></script>
+
+<body>
+
+    <div id="container">
+        <div class="content-list">
+            <div class="poll-list icon-plus">
+                <a href="/app/getCreate">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+
+            <% for(var enquete of enquetes) { %>
+
+                <%
+                
+                    var date = new Date()
+                    var actualyDate = [
+                        date.getFullYear(),
+                        date.getMonth() + 1,
+                        date.getDate()
+                    ];
+
+                    var dbDateEncerramento = enquete.dataValues.dataEncerramento
+                    var encerDate = [
+                        Number(dbDateEncerramento.slice(0, 4)),
+                        Number(dbDateEncerramento.slice(5, 7)),
+                        Number(dbDateEncerramento.slice(8))
+                    ];
+
+                    var dbDateAbertura = enquete.dataValues.dataAbertura
+                    var abertDate = [
+                        Number(dbDateAbertura.slice(0, 4)),
+                        Number(dbDateAbertura.slice(5, 7)),
+                        Number(dbDateAbertura.slice(8))
+                    ];
+
+
+
+                    function testaData(abeData, atualData, fecData) {
+                        if(
+                            atualData[0] >= abeData[0] &&
+                            atualData[1] >= abeData[1] &&
+                            atualData[2] >= abeData[2] &&
+                            atualData[0] <= fecData[0] &&
+                            atualData[1] <= fecData[1] &&
+                            atualData[2] <= fecData[2]
+                        ) {
+
+                            return 'em andamento'
+
+                        } else if(
+                            atualData[0] <= abeData[0] &&
+                            atualData[1] <= abeData[1] &&
+                            atualData[2] <= abeData[2]
+                        ) {
+
+                            return 'agendada'
+
+                        } else if(
+                            atualData[0] >= fecData[0] &&
+                            atualData[1] >= fecData[1] &&
+                            atualData[2] >= fecData[2]
+                        ) {
+
+                            return 'finalizada'
+
+                        }
+                    }
+
+                %>
+
+                <a style="text-decoration: none;" href="/app/indView/<%= enquete.dataValues.id %>">
+                    <div class="poll-list single-poll">
+                        <h3>
+                            <%= enquete.dataValues.titulo %>
+                        </h3>
+                        <output></output>
+                        <h5>Status: <%= testaData(abertDate, actualyDate, encerDate) %></h5>
+                        <a style="text-decoration: none;" href="/app/getEdit/<%= enquete.dataValues.id %>">
+                            <div class="btn-editPoll">
+                                <i class="fa-solid fa-pen"></i>
+                            </div>
+                        </a>
+                    </div>
+                </a>
+            <% } %>
+
+
+        </div>
+    </div>
+    
+</body>

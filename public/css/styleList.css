@@ -1,0 +1,116 @@
+* {
+    font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f7;
+}
+
+/*container*/
+#container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.content-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.content-list .poll-list {
+    font-size: 17px;
+    line-height: 1.47059;
+    font-weight: 400;
+    letter-spacing: -.022em;
+    color: #1d1d1f;
+    font-style: normal;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+    transition: all .3s cubic-bezier(0,0,.5,1);
+    width: 20rem;
+    cursor: pointer;
+    margin: 10px;
+    padding: 15px 10px;
+}
+
+.content-list .poll-list:hover {
+    transform: scale(1.04);
+    box-shadow: 2px 4px 12px rgba(0,0,0,.18);
+}
+
+.poll-list.icon-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    box-shadow: none;
+}
+
+.poll-list.icon-plus:hover {
+    transform: scale(1.1);
+    box-shadow: none;
+}
+
+.poll-list.icon-plus i {
+    font-size: 100px;
+    color: #0077b6;
+    background-color: #ade8f460;
+    padding: 20px 27px;
+    border-radius: 500px;
+}
+
+.poll-list.single-poll {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.poll-list h3 {
+    text-align: center;
+    font-size: 28px;
+    line-height: 1.14286;
+    font-weight: 600;
+    letter-spacing: .007em;
+    color: #1d1d1f;
+    margin: 0 0 9px;
+}
+
+.poll-list h5 {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.14286;
+    font-weight: 500;
+    letter-spacing: .007em;
+    color: #1d1d1f;
+    margin: 0 0 9px;
+}
+
+.btn-editPoll i {
+    font-size: 1.3em;
+    color: #0077b6;
+    background-color: #ade8f460;
+    padding: 13px 15px;
+    border-radius: 500px;
+    margin-top: 20px;
+    transition-duration: 0.3s;
+}
+
+.btn-editPoll i:hover {
+    transform: scale(1.2);
+}

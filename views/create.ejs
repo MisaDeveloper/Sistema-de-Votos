@@ -1,0 +1,78 @@
+<body>
+
+    <link rel="stylesheet" href="/css/styleForm.css">
+    <script src="https://kit.fontawesome.com/94271d9134.js" crossorigin="anonymous"></script>
+
+    <div id="container">
+        <div class="div-form">
+            <form class="form" action="/app/create" method="post">
+                <div class="btn-voltar">
+                    <a href="/app/">
+                        <div>
+                            Voltar
+                        </div>
+                    </a>
+                </div>
+                <h3 class="titulo">
+                    Criar enquete
+                </h3>
+
+                <div class="div-input">
+                    <label for="">
+                        Titulo:
+                    </label>
+                    <div class="input-title">
+                        <input placeholder="Digite o Título da enquete" maxlength="100" name="title" type="text">
+                    </div>
+                </div>
+
+                <div class="div-input">
+                    <label for="">
+                        Opções:
+                    </label>
+                    <div class="input-options">
+                        <div>
+                            <input placeholder="1ª Opção" maxlength="50" name="option1" type="text">
+                        </div>
+                        <div>
+                            <input placeholder="2ª Opção" maxlength="50" name="option2" type="text">
+                        </div>
+                        <div>
+                            <input placeholder="3ª Opção" maxlength="50" name="option3" type="text">
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <div class="div-input">
+                    <label for="">
+                        Data de abertura:
+                    </label>
+                    <div class="input-data">
+                        <div>
+                            <input name="openDate" type="date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="div-input">
+                    <label for="">
+                        Data de encerramento:
+                    </label>
+                    <div class="input-data">
+                        <div>
+                            <input name="closeDate" type="date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="div-buttons">
+                    <button type="submit">Criar Enquete</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+</body>

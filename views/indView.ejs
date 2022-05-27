@@ -1,0 +1,122 @@
+<body>
+
+    <%
+    
+        var date = new Date()
+        var actualyDate = [
+            date.getFullYear(),
+            date.getMonth() + 1,
+            date.getDate()
+        ];
+
+        var dbDateEncerramento = enquetes.dataValues.dataEncerramento
+        var encerDate = [
+            Number(dbDateEncerramento.slice(0, 4)),
+            Number(dbDateEncerramento.slice(5, 7)),
+            Number(dbDateEncerramento.slice(8))
+        ];
+
+        var dbDateAbertura = enquetes.dataValues.dataAbertura
+        var abertDate = [
+            Number(dbDateAbertura.slice(0, 4)),
+            Number(dbDateAbertura.slice(5, 7)),
+            Number(dbDateAbertura.slice(8))
+        ];
+
+
+
+        function testaData(abeData, atualData, fecData) {
+            if(
+                atualData[0] >= abeData[0] &&
+                atualData[1] >= abeData[1] &&
+                atualData[2] >= abeData[2] &&
+                atualData[0] <= fecData[0] &&
+                atualData[1] <= fecData[1] &&
+                atualData[2] <= fecData[2]
+            ) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+    %>
+
+    <link rel="stylesheet" href="/css/styleIndView.css">
+    <script src="https://kit.fontawesome.com/94271d9134.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" integrity="sha512-9mpsATI0KClwt+xVZfbcf2lJ8IFBAwsubJ6mI3rtULwyM3fBmQFzj0It4tGqxLOGQwGfJdk/G+fANnxfq9/cew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <div id="container">
+        <div class="div-poll">
+            <div class="ind-poll">
+
+                <div class="div-separate-span">
+                    <div class="btn-voltar">
+                        <a href="/app/">
+                            <div>
+                                Voltar
+                            </div>
+                        </a>
+                    </div>
+                    <div class="dta-poll">
+                        <div>
+                            Data de abertura: <%= abertDate[2] + "/" + abertDate[1] + "/" + abertDate[0] %>
+                            <br>
+                            Data de enc.: <%= encerDate[2] + "/" + encerDate[1] + "/" + encerDate[0] %>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-ind-poll">
+                    <h3 class="poll-ind-title">
+                        <%= enquetes.dataValues.titulo %>
+                    </h3>
+                    <hr>
+                    <div class="poll-ind-options">
+
+                        <% if(testaData(abertDate, actualyDate, encerDate)) { %>
+
+                            <% for(option of enquetes['tb_opcoes']) { %>
+
+                                <div class="cont-ind-option">
+                                    <div onclick="computVoto(<%= option.dataValues.id %>)" class="option">
+                                        <%= option.dataValues.textoOpcao %>
+                                    </div>
+                                    <div id="id-<%= option.dataValues.id %>" class="votos-option">
+                                        <%= option.dataValues.votos %>
+                                    </div>
+                                </div>
+    
+                            <% } %>
+
+                        <% } else { %>
+
+                            <h5 class="unable-poll">Esta enquete não está ativa!</h5>
+
+                        <% } %>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var socket = io('http://localhost:8081');
+
+        socket.on('receivedVoto', (data) => {
+            var divVoto = document.getElementById("id-"+data.id);
+            divVoto.innerHTML = data.votos
+        })
+
+        function computVoto(id) {
+            var divVoto = document.getElementById("id-"+id);
+            votos = divVoto.innerHTML
+            divVoto.innerHTML = Number(votos)+1
+            socket.emit('sendId', id)
+        }
+    </script>
+
+    
+</body>

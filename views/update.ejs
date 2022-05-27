@@ -1,0 +1,79 @@
+<body>
+
+    <link rel="stylesheet" href="/css/styleForm.css">
+    <script src="https://kit.fontawesome.com/94271d9134.js" crossorigin="anonymous"></script>
+
+    <div id="container">
+        <div class="div-form">
+            <form class="form" action="/app/edit/<%= enquetes.dataValues.id %>" method="post">
+                <div class="div-separate-span">
+                    <div class="btn-voltar">
+                        <a href="/app/">
+                            <div>
+                                Voltar
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <h3 class="titulo">
+                    Editar enquete
+                </h3>
+
+                <div class="div-input">
+                    <label for="">
+                        Titulo:
+                    </label>
+                    <div class="input-title">
+                        <input value="<%= enquetes.dataValues.titulo %>" placeholder="Digite o Título da enquete" maxlength="100" name="title" type="text">
+                    </div>
+                </div>
+
+                <div class="div-input">
+                    <label for="">
+                        Opções:
+                    </label>
+                    <div class="input-options">
+
+                        <% for(var i = 0; i < 3; i++) { %>
+
+                            <div>
+                                <input value="<%= enquetes['tb_opcoes'][i].dataValues.textoOpcao %>" placeholder="<%= i+1 %>ª Opção" maxlength="50" name="option<%= i+1 %>" type="text">
+                            </div>
+
+                        <% } %>
+
+                    </div>
+                </div>
+
+                <div class="div-input">
+                    <label for="">
+                        Data de abertura:
+                    </label>
+                    <div class="input-data">
+                        <div>
+                            <input name="openDate" value="<%= enquetes.dataValues.dataAbertura %>" type="date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="div-input">
+                    <label for="">
+                        Data de encerramento:
+                    </label>
+                    <div class="input-data">
+                        <div>
+                            <input name="closeDate" value="<%= enquetes.dataValues.dataEncerramento %>" type="date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="div-buttons">
+                    <a href="/app/delete/<%= enquetes.dataValues.id %>"><button type="button" class="btn-delete">Excluir enquete</button></a>
+                    <button type="submit">Salvar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+</body>
